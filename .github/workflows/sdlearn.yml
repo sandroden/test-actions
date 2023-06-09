@@ -9,6 +9,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
+      - run: |
+          env   
       - run: npm install -g bats
       - run: bats -v
       - run: echo SD_VAR=${{ env.SD_VAR }}
