@@ -11,6 +11,5 @@ jobs:
           node-version: '14'
       - run: npm install -g bats
       - run: bats -v
-      - run: echo $SD_VARS
-      - run: echo ${{ SD_VAR }}
+      - run: echo ${{ env.SD_VAR }}
       
