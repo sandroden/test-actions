@@ -13,5 +13,5 @@ jobs:
           env | sort   
       - run: npm install -g bats
       - run: bats -v
-      - run: echo SD_VAR=${{ env.SD_VAR }}
-      - run: echo SDVAR=$env.SD_VAR
+      - run: echo SD_VAR=${{ vars.SD_VAR }}
+      - run: echo SDVAR=$vars.SD_VAR
