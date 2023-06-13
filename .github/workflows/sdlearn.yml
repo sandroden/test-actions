@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is learning GitHub Actions
 on: [push, workflow_dispatch]
 jobs:
   build:
-    runs-on: ubuntu-lastes
+    runs-on: ubuntu-lastest
     environment: prod
     steps:
       - name: Docker Login
