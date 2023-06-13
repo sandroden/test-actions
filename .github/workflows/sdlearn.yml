@@ -15,9 +15,9 @@ jobs:
           # Server address of Docker registry. If not set then will default to Docker Hub
           registry: registry.mumble.cloud
           # Username used to log against the Docker registry
-          username: ${{ vars.REGISTRY_USER }}
+          username: mumble
           # Password or personal access token used to log against the Docker registry
-          password: ${{ vars.REGISTRY_PASSWORD }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
           # Specifies whether the given registry is ECR (auto, true or false)
           #ecr: # optional, default is auto
           # Log out from the Docker registry at the end of a job
