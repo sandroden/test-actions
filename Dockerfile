@@ -6,9 +6,7 @@ FROM python:${PY_VER}-slim AS build
 RUN apt-get update && apt-get install -y build-essential libpcre3 libpcre3-dev
 RUN pip wheel --no-cache-dir --wheel-dir /wheels uwsgi
 
-
-ARG PY_VER
-FROM python:${PY_VER}-slim
+FROM python:${PY_VER}-slim AS prod
 COPY --from=build /wheels /wheels
 RUN pip install --no-cache /wheels/*
 
@@ -40,7 +38,8 @@ RUN set -ex \
   && apt-get update && apt-get install -y --no-install-recommends $RUN_DEPS $BUILD_DEPS \
   && mkdir -p /var/www/.ipython \
   && mkdir -p /var/log/uwsgi /var/log/django \
-  && pip install --no-cache-dir --only-binary :all: --extra-index-url https://pypi.thux.dev/simple/ -U pip>=23.0 setuptools wheel uwsgi \
+  # && pip install --no-cache-dir --only-binary :all: --extra-index-url https://pypi.thux.dev/simple/ -U pip>=23.0 setuptools wheel uwsgi \
+  && pip install --no-cache-dir -U pip>=23.0 setuptools wheel  \
   && chown -R ${APP_USER} /var/www \
   && echo "alias ll='ls -l --color=auto'" > /var/www/.bashrc \
   && echo "alias ll='ls -l --color=auto'" > /root/.bashrc \
