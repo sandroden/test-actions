@@ -32,6 +32,7 @@ jobs:
           file: ./Dockerfile
           # List of metadata for an image
           labels: ubu-test
+          build-args: PY_VER=3.10
           # Load is a shorthand for --output=type=docker
           # load: # optional, default is false
           # Set the networking mode for the RUN instructions during build
