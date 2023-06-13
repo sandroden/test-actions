@@ -6,8 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     steps:
-      - run: echo "env: ${{ env.REGISTRY_USERNAME }}"
-      - run: echo "vars: ${{ vars.REGISTRY_USERNAME }}"
+      - run: echo env=${{ env.REGISTRY_USERNAME }}
+      - run: echo vars=${{ vars.REGISTRY_USERNAME }}
       - uses: hmarr/debug-action@v2
       - name: Docker Login
         # You may pin to the exact commit or the version.
