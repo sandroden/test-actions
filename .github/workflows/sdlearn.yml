@@ -29,8 +29,7 @@ jobs:
           # Path to the Dockerfile
           file: ./Dockerfile
           # List of metadata for an image
-          labels: 
-            - ubu-test
+          labels: ubu-test
           # Load is a shorthand for --output=type=docker
           # load: # optional, default is false
           # Set the networking mode for the RUN instructions during build
