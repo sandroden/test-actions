@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     steps:
+      - uses: hmarr/debug-action@v2
       - name: Docker Login
         # You may pin to the exact commit or the version.
         # uses: docker/login-action@465a07811f14bebb1938fbed4728c6a1ff8901fc
