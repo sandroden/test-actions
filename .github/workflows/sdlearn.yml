@@ -41,13 +41,13 @@ jobs:
     # List of output destinations (format: type=local,dest=path)
     #outputs: # optional
     # List of target platforms for build
-    platforms: # optional
+    # platforms: # optional
     # Generate provenance attestation for the build (shorthand for --attest=type=provenance)
     #provenance: # optional
     # Always attempt to pull all referenced images
     #pull: # optional, default is false
     # Push is a shorthand for --output=type=registry
-    push: true
+    #push: true
     # Generate SBOM attestation for the build (shorthand for --attest=type=sbom)
     #sbom: # optional
     # List of secrets to expose to the build (e.g., key=string, GIT_AUTH_TOKEN=mytoken)
