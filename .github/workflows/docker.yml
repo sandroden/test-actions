@@ -4,7 +4,7 @@ env:
   IMAGE_NAME: sdlearn
   IMAGE_TAG: latest
   SRC_CONTEXT: .
-  SRC_CONTEXT_: mumble_b
+  # SRC_CONTEXT: mumble_b
 on:
   push:
       branches:
@@ -29,7 +29,8 @@ jobs:
       - name: Build and push Docker images
         uses: docker/build-push-action@v4.1.0
         with:
-          context: ${{ env.SRC_CONTEXT }}
+          #context: ${{ env.SRC_CONTEXT }}
+          file: ./Dockerfile
           push: true
           tags: ${{vars.REGISTRY_HOST}}/${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}
           
