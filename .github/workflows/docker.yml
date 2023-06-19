@@ -1,0 +1,33 @@
+name: learn-github-actions
+run-name: ${{ github.actor }} is learning GitHub Actions
+env:
+  IMAGE_NAME: sdlearn
+  IMAGE_TAG: latest
+on:
+  push:
+      branches:
+        - main
+  workflow_dispatch:
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - uses: hmarr/debug-action@v2
+        name: variable debug
+        
+      - name: Docker Login
+        uses: docker/login-action@v2.2.0
+        with:
+          registry: ${{ vars.REGISTRY_HOST }}
+          username: ${{ vars.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v4.1.0
+        with:
+          context: mumble_b
+          push: true
+          tags: ${{vars.REGISTRY_HOST}}/${env.IMAGE_NAME}:${env.IMAGE_TAG}
+          
