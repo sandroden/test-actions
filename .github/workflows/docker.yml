@@ -3,6 +3,8 @@ run-name: ${{ github.actor }} is learning GitHub Actions
 env:
   IMAGE_NAME: sdlearn
   IMAGE_TAG: latest
+  SRC_CONTEXT: .
+  SRC_CONTEXT_: mumble_b
 on:
   push:
       branches:
@@ -27,7 +29,7 @@ jobs:
       - name: Build and push Docker images
         uses: docker/build-push-action@v4.1.0
         with:
-          context: mumble_b
+          context: ${{ SRC_CONTEXT }}
           push: true
           tags: ${{vars.REGISTRY_HOST}}/${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}
           
