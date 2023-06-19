@@ -1,4 +1,4 @@
-name: learn-github-actions
+name: create-a-docker-image
 run-name: ${{ github.actor }} is learning GitHub Actions
 env:
   IMAGE_NAME: sdlearn
