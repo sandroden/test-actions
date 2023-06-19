@@ -1,57 +1,32 @@
 name: learn-github-actions
 run-name: ${{ github.actor }} is learning GitHub Actions
-on: [push, workflow_dispatch]
+env:
+  IMAGE_NAME: sdlearn
+  IMAGE_TAG: latest
+on:
+  - push:
+      branches:
+        - main
+  - workflow_dispatch
 jobs:
   build:
     runs-on: ubuntu-latest
     environment: prod
     steps:
-      - run: echo vars=${{vars.REGISTRY_USERNAME}}
       - uses: hmarr/debug-action@v2
+        name: variable debug
+        
       - name: Docker Login
-        # You may pin to the exact commit or the version.
-        # uses: docker/login-action@465a07811f14bebb1938fbed4728c6a1ff8901fc
         uses: docker/login-action@v2.2.0
         with:
-          # Server address of Docker registry. If not set then will default to Docker Hub
-          registry: registry.mumble.cloud
-          # Username used to log against the Docker registry
+          registry: ${{ vars.REGISTRY_HOST }}
           username: ${{ vars.REGISTRY_USERNAME }}
-          # Password or personal access token used to log against the Docker registry
           password: ${{ secrets.REGISTRY_PASSWORD }}
-          # Specifies whether the given registry is ECR (auto, true or false)
-          #ecr: # optional, default is auto
-          # Log out from the Docker registry at the end of a job
-          #logout: # optional, default is true
+
       - name: Build and push Docker images
-        # You may pin to the exact commit or the version.
-        # uses: docker/build-push-action@44ea916f6c540f9302d50c2b1e5a8dc071f15cdf
         uses: docker/build-push-action@v4.1.0
         with:
-          # Path to the Dockerfile
-          file: ./Dockerfile
-          # List of metadata for an image
-          labels: ubu-test
-          build-args: |
-              PY_VER=3.10
-              POETRY_VERSION=1.5.1
+          context: mumble_b
           push: true
-          tags: registry.mumble.cloud/tools/test-actions:0.1
-          # Load is a shorthand for --output=type=docker
-          # load: # optional, default is false
-          # Set the networking mode for the RUN instructions during build
-
-  check-bats-version:
-    if: false
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '14'
-      - run: |
-          env | sort   
-      - run: npm install -g bats
-      - run: bats -v
-      - run: echo SD_VAR=${{ vars.SD_VAR }}
-      - run: echo SDVAR=$vars.SD_VAR
+          tags: ${{vars.REGISTRY_HOST}}/${env.IMAGE_NAME}:${env.IMAGE_TAG}
+          
