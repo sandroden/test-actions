@@ -33,4 +33,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{vars.REGISTRY_HOST}}/${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}
+          build-args: |
+              PY_VER=3.10
+              POETRY_VERSION=1.5.1
           
